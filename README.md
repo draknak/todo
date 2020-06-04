@@ -3,6 +3,7 @@ Simple vue.js todo web app
 
 # Plans
 - In the future I plan to redesign the front end,
+- Put into docker container
 - Add a backend (Python, nodejs or whatever im feeling at the time),
 - Add a database (Some form of SQL)
 - Make it more interactive (being able to drag the items)
