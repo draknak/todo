@@ -1,6 +1,6 @@
-# todo-app
+# frontend
 
-> simple todo app
+> Frontend of todo app
 
 ## Build Setup
 
