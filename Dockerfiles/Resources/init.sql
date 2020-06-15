@@ -1,43 +1,40 @@
--- Create a new database called 'todo'
--- Connect to the 'master' database to run this snippet
-USE master
-GO
--- Create the new database if it does not exist already
-IF NOT EXISTS (
-    SELECT name
-        FROM sys.databases
-        WHERE name = N'todo'
-)
-CREATE DATABASE todo
-USE todo
-GO
+-- -----------------------------------------------------
+-- Schema todo
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `todo` ;
 
--- Create a new table called 'TableName' in schema 'SchemaName'
--- Drop the table if it already exists
-IF OBJECT_ID('todo.tasks', 'U') IS NOT NULL
-DROP TABLE todo.tasks
-GO
--- Create the table in the specified schema
-CREATE TABLE todo.tasks
-(
-    Id INT NOT NULL PRIMARY KEY, -- primary key column
-    title [NVARCHAR](50) NOT NULL,
-    description [NVARCHAR](50) NOT NULL
-    -- specify more columns here
-);
-GO
+-- -----------------------------------------------------
+-- Schema todo
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `todo` DEFAULT CHARACTER SET utf8 ;
+USE `todo` ;
 
--- Insert rows into table 'tasks'
-INSERT INTO tasks
-( -- columns to insert data into
- [title], [description]
-)
-VALUES
-( -- first row: values for the columns in the list above
- 'Column2_Value', 'Column3_Value'
-),
-( -- second row: values for the columns in the list above
- 'Column2_Value', 'Column3_Value'
-)
--- add more rows here
-GO
+-- -----------------------------------------------------
+-- Table `todo`.`task`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `todo`.`tasks` ;
+
+CREATE TABLE IF NOT EXISTS `todo`.`tasks` (
+  `task_id` INT NOT NULL AUTO_INCREMENT,
+  `task_title` TEXT NOT NULL,
+  `task_description` TEXT NOT NULL,
+  `createdAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`task_id`))
+ENGINE = InnoDB;
+
+INSERT INTO `todo`.`tasks` (`task_id`, `task_title`, `task_description`) VALUES (1, 'test', 'test test');
+
+-- -----------------------------------------------------
+-- Table `todo`.`user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `todo`.`user` ;
+
+CREATE TABLE IF NOT EXISTS `todo`.`user` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `email` TEXT NULL,
+  `password` TEXT NOT NULL,
+  `createdAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`))
+ENGINE = InnoDB;

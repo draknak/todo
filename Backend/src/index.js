@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
 const cors = require('cors');
 
 const port = process.env.PORT || 8081;
@@ -12,8 +11,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //mysql
-const tasks = require('./routes/api/tasks');
-app.use('/api/tasks', tasks);
+const tasks = require('./routes/tasks');
+app.use('/tasks', tasks);
 
 app.get('/', (req, res) => {
     res.send(console.log("Hi"));

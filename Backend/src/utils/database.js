@@ -1,18 +1,18 @@
-const mysql = require('mysql');
-
-const pool = mysql.createPool({
-    host: 'database',
-    port: 3306,
-    user: 'todo',
-    password: 'todo',
-    database: 'todo',
-    multipleStatements: true
+const Sequelize = require('sequelize');
+const db = {};
+const sequelize = new Sequelize("todo", "todo", "todo", {
+    host: "database",
+    dialect: "mysql",
+    operatorsAliases: false,
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    }
 });
 
-const getConnection = function(callback) {
-    pool.getConnection(function(err, connection) {
-        callback(err, connection);
-    });
-};
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
-module.exports = getConnection;
+module.exports = db;
