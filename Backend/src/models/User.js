@@ -1,5 +1,3 @@
-const { sequelize } = require("../utils/database");
-
 module.exports = (sequelize, DataTypes) =>
     sequelize.define('User', {
         email: {

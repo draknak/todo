@@ -11,8 +11,4 @@ module.exports = (sequelize, DataTypes) =>
         task_description: {
             type: DataTypes.STRING
         }
-    },
-    {
-        timestamps: true,
-    }
-);
+    })
