@@ -1,19 +1,15 @@
-const Sequelize = require('sequelize');
-const db = require('../utils/database');
-
-module.exports = db.sequelize.define(
-    "tasks",
-    {
+module.exports = (sequelize, DataTypes) => 
+    sequelize.define('Task', {
         task_id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
         task_title: {
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         task_description: {
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         }
     },
     {
