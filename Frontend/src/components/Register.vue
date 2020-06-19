@@ -6,20 +6,39 @@
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
-        <input 
-          type="email" 
-          name="email" 
-          placeholder="email" 
-          v-model="email">
-        <br>
-        <input 
-          type="password" 
-          name="password" 
-          v-model="password">
-        <br>
-        <div class="error" v-html="error" />
-        <br>
-        <v-btn class="cyan" @click="register">Register</v-btn> 
+          <form 
+            name="todo-register-form"
+            autocomplete="off">
+            <v-row>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="email"
+                  :rules="[rules.required]"
+                  name="Email"
+                  label="Email"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <br>
+            <v-row>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="password"
+                  :rules="[rules.required, rules.min, rules.max]"
+                  type="password"
+                  name="Password"
+                  label="Password"
+                  hint="At least 8 characters"
+                  autocomplete="new-password"
+                  counter
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <br>
+            <div class="error" v-html="error" />
+            <br>
+            <v-btn class="cyan" @click="register">Register</v-btn>
+          </form> 
         </div>
       </div>
     </v-flex>
@@ -33,20 +52,27 @@ export default {
     return {
       email: '',
       password: '',
-      error: null
+      error: null,
+      rules: {
+        required: value => !!value || 'Required.',
+        min: v => v.length >= 8 || 'Min 8 characters',
+        max: v => v.length <= 32 || 'Max 32 characters',
+      },
     };
   },
   methods: {
     async register () {
       try {
-        await AuthenticationService.register({
+        const response = await AuthenticationService.register({
         email: this.email,
         password: this.password
       });
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }
-    }
+    },
   },
 };
 </script>
