@@ -1,7 +1,9 @@
 const AuthenticationController = require('./controllers/AuthenticationController');
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy');
 
-const TaskController = require('./controllers/TaskController');
+const TasksController = require('./controllers/TasksController');
+
+const BoardsController = require('./controllers/BoardsController');
 
 
 module.exports = (app) => {
@@ -13,5 +15,10 @@ module.exports = (app) => {
         AuthenticationController.login)
 
     app.post('/task',
-        TaskController.add)
+        TasksController.post)
+
+    app.get('/boards',
+        BoardsController.index)
+    app.post('/boards',
+        BoardsController.post)
 }

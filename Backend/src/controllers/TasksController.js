@@ -1,13 +1,13 @@
 const {Task} = require('../models')
 
 module.exports = {
-    async add (req, res) {
+    async post (req, res) {
         try {
             const task = await Task.create(req.body)
-            res.send (task.toJSON())
+            res.send (task)
         } catch (err) {
             res.status(400).send({
-                error: 'Task already exists'
+                error: 'An error has occured trying to create the task'
             })
         }
     }
