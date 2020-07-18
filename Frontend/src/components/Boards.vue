@@ -18,7 +18,7 @@ export default {
         }
     },
     async mounted () {
-        this.boards = await BoardsService.index()
+        this.boards = (await BoardsService.index()).data
     }
 }
 </script>

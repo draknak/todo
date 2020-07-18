@@ -13,7 +13,7 @@ module.exports = {
     },
     async index (req, res) {
         try {
-            const boards = Board.findAll({
+            const boards = await Board.findAll({
                 limit: 10
             })
             res.send(boards)
